@@ -1,5 +1,6 @@
 import { motion, useMotionValue, useSpring, useTransform, useScroll } from 'framer-motion';
 import { useEffect, useState, useRef } from 'react';
+import { useIsMobile } from '../hooks/useIsMobile';
 
 const Orbit = ({ radius, rotateX, rotateY, delay, speed = 10, color = 'rgba(102, 168, 238, 0.2)' }) => {
   return (
@@ -42,6 +43,7 @@ const Orbit = ({ radius, rotateX, rotateY, delay, speed = 10, color = 'rgba(102,
 export default function HeroVisual() {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll();
+  const isMobile = useIsMobile(768);
   
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -84,36 +86,39 @@ export default function HeroVisual() {
 
   return (
     <div style={{
-      position: 'fixed', // Fixed to follow through scroll
+      position: 'fixed',
       top: 0,
       right: 0,
-      width: '50vw',
+      /* On mobile: full width at low opacity (backdrop effect) */
+      /* On desktop: right half only */
+      width: isMobile ? '100vw' : '50vw',
       height: '100vh',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       perspective: '1500px',
       overflow: 'hidden',
-      zIndex: 0, 
+      zIndex: 0,
       pointerEvents: 'none',
-      transformStyle: 'preserve-3d'
+      transformStyle: 'preserve-3d',
+      opacity: isMobile ? 0.25 : 1, // subtle backdrop on mobile
     }}>
       <motion.div
         style={{
           position: 'relative',
-          width: '1px', // Anchor point
+          width: '1px',
           height: '1px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           transformStyle: 'preserve-3d',
-          x: xPos,
-          y: yPos,
-          scale,
+          x: isMobile ? 0 : xPos,
+          y: isMobile ? 0 : yPos,
+          scale: isMobile ? 0.55 : scale,
           opacity,
           rotateX: mouseTiltX,
           rotateY: mouseTiltY,
-          rotateZ: globalRotation
+          rotateZ: globalRotation,
         }}
       >
         {/* Core Glowing Orb */}

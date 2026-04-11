@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Briefcase, Calendar, MapPin, ChevronRight } from 'lucide-react';
+import { useIsMobile } from '../hooks/useIsMobile';
 
 const experiences = [
   {
@@ -42,6 +43,8 @@ const experiences = [
 ];
 
 export default function Experience() {
+  const isMobile = useIsMobile(768);
+
   return (
     <section id="experience" className="section-padding" style={{ backgroundColor: 'var(--surface)' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
@@ -50,88 +53,80 @@ export default function Experience() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          style={{ marginBottom: '60px' }}
+          style={{ marginBottom: isMobile ? '36px' : '60px' }}
         >
-          <span className="label-md" style={{ color: 'var(--primary)', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
+          <span className="label-md" style={{ color: 'var(--primary)', textTransform: 'uppercase', letterSpacing: '0.2em', fontSize: isMobile ? '0.65rem' : '0.875rem' }}>
             Professional Journey
           </span>
-          <h2 className="display-sm" style={{ marginTop: '1rem', color: 'var(--on-surface)' }}>
+          <h2 style={{ marginTop: '0.75rem', color: 'var(--on-surface)', fontSize: isMobile ? '1.5rem' : '2rem', fontWeight: '600' }}>
             Architectural Experience
           </h2>
         </motion.div>
 
         <div style={{ position: 'relative' }}>
-          {/* Central Timeline Line */}
+          {/* Timeline line */}
           <div style={{ 
             position: 'absolute', 
-            left: '31px', 
-            top: '0', 
-            bottom: '0', 
-            width: '2px', 
-            background: 'linear-gradient(to bottom, var(--primary), rgba(102, 168, 238, 0.1))',
+            left: isMobile ? '22px' : '31px', 
+            top: '0', bottom: '0', width: '2px', 
+            background: 'linear-gradient(to bottom, var(--primary), rgba(102,168,238,0.1))',
             borderRadius: '1px'
           }} />
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '60px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: isMobile ? '36px' : '60px' }}>
             {experiences.map((exp, index) => (
               <motion.div 
                 key={index}
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true, margin: '-100px' }}
                 transition={{ duration: 0.8, delay: index * 0.2 }}
-                style={{ 
-                  display: 'flex', 
-                  gap: '40px',
-                  position: 'relative'
-                }}
+                style={{ display: 'flex', gap: isMobile ? '14px' : '40px', position: 'relative' }}
               >
-                {/* Timeline Dot */}
+                {/* Timeline dot */}
                 <div style={{ 
-                  width: '64px', 
-                  height: '64px', 
-                  borderRadius: '16px', 
+                  width: isMobile ? '44px' : '64px', 
+                  height: isMobile ? '44px' : '64px', 
+                  borderRadius: isMobile ? '10px' : '16px', 
                   backgroundColor: 'var(--surface-container-low)', 
                   border: '1px solid var(--outline-variant)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  zIndex: 2,
-                  flexShrink: 0,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  zIndex: 2, flexShrink: 0,
                   boxShadow: '0 4px 20px rgba(0,0,0,0.2)'
                 }}>
-                  <Briefcase size={24} color="var(--primary)" />
+                  <Briefcase size={isMobile ? 18 : 24} color="var(--primary)" />
                 </div>
 
                 {/* Content Card */}
-                <div style={{ flex: 1 }}>
+                <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ 
-                    padding: '32px', 
-                    borderRadius: '24px', 
+                    padding: isMobile ? '16px' : '32px', 
+                    borderRadius: isMobile ? '14px' : '24px', 
                     backgroundColor: 'var(--surface-container-low)', 
-                    border: '1px solid rgba(139, 145, 155, 0.1)',
-                    transition: 'all 0.3s'
+                    border: '1px solid rgba(139,145,155,0.1)',
                   }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px', marginBottom: '20px' }}>
-                      <div>
-                        <h3 className="headline-sm" style={{ color: 'var(--on-surface)', marginBottom: '4px' }}>{exp.role}</h3>
-                        <p className="title-md" style={{ color: 'var(--primary)', fontWeight: '600' }}>{exp.company}</p>
-                      </div>
-                      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '8px' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--on-surface-variant)', fontSize: '0.875rem' }}>
-                          <Calendar size={14} /> {exp.period}
+                    <div style={{ marginBottom: '16px' }}>
+                      <h3 style={{ 
+                        fontSize: isMobile ? '1rem' : '1.25rem',
+                        color: 'var(--on-surface)', marginBottom: '4px', fontWeight: '600',
+                        lineHeight: '1.3'
+                      }}>{exp.role}</h3>
+                      <p style={{ color: 'var(--primary)', fontWeight: '600', fontSize: isMobile ? '0.875rem' : '1rem' }}>{exp.company}</p>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginTop: '10px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--on-surface-variant)', fontSize: '0.8125rem' }}>
+                          <Calendar size={13} /> {exp.period}
                         </div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--on-surface-variant)', fontSize: '0.875rem' }}>
-                          <MapPin size={14} /> {exp.location}
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--on-surface-variant)', fontSize: '0.8125rem' }}>
+                          <MapPin size={13} /> {exp.location}
                         </div>
                       </div>
                     </div>
 
-                    <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                    <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
                       {exp.description.map((item, i) => (
-                        <li key={i} style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
-                          <ChevronRight size={18} color="var(--primary)" style={{ flexShrink: 0, marginTop: '2px' }} />
-                          <span className="body-md" style={{ color: 'var(--on-surface-variant)', lineHeight: '1.6' }}>{item}</span>
+                        <li key={i} style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
+                          <ChevronRight size={15} color="var(--primary)" style={{ flexShrink: 0, marginTop: '3px' }} />
+                          <span style={{ color: 'var(--on-surface-variant)', lineHeight: '1.55', fontSize: isMobile ? '0.8125rem' : '0.9375rem' }}>{item}</span>
                         </li>
                       ))}
                     </ul>

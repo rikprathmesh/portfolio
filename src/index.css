@@ -69,20 +69,34 @@ a, button {
 }
 
 /* Typography Scale */
+/* Typography Scale */
 .display-lg { font-size: 3.5rem; letter-spacing: -0.02em; font-weight: 700; line-height: 1.1; }
 .headline-lg { font-size: 2rem; letter-spacing: -0.02em; font-weight: 600; line-height: 1.2; }
+.headline-md { font-size: 1.5rem; font-weight: 600; line-height: 1.3; }
 .title-lg { font-size: 1.5rem; font-weight: 500; line-height: 1.3; }
 .title-sm { font-size: 1.125rem; font-weight: 500; line-height: 1.4; }
 .body-lg { font-size: 1rem; color: var(--on-surface-variant); line-height: 1.6; }
 .label-md { font-size: 0.875rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; }
 .label-sm { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; }
 
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .display-lg { font-size: 2.5rem; }
+  .headline-lg { font-size: 1.75rem; }
+  .section-padding { padding: 4rem 1.25rem; }
+}
+
+@media (max-width: 480px) {
+  .display-lg { font-size: 2.25rem; }
+  .headline-lg { font-size: 1.5rem; }
+}
+
 /* Custom Ghost Border */
 .ghost-border {
   border: 1px solid rgba(65, 71, 80, 0.15); /* outline-variant at 15% */
 }
 
-/* Layout Utilities (No line rule) */
+/* Layout Utilities */
 .section-padding {
-  padding: 6rem 2rem;
+  padding: 8rem 2rem;
 }

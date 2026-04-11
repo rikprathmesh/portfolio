@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { SiReact, SiNextdotjs, SiNestjs, SiNodedotjs, SiTypescript, SiPostgresql, SiHtml5, SiCss, SiSass, SiTailwindcss, SiGnubash } from 'react-icons/si';
 import { FaNetworkWired } from 'react-icons/fa';
+import { useIsMobile } from '../hooks/useIsMobile';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -123,6 +124,8 @@ function SkillBadge3D({ skill }) {
 
 export default function Skills() {
   const containerRef = useRef(null);
+  const isMobile = useIsMobile(768);
+  const isSmall = useIsMobile(480);
 
   useEffect(() => {
     const badges = containerRef.current.querySelectorAll('.skill-badge');
@@ -149,14 +152,18 @@ export default function Skills() {
       position: 'relative'
     }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        <h2 className="headline-lg" style={{ marginBottom: '4rem', color: 'var(--on-surface)' }}>
+        <h2 className="headline-lg" style={{ 
+          marginBottom: isMobile ? '2rem' : '4rem', 
+          color: 'var(--on-surface)',
+          fontSize: isMobile ? '1.5rem' : '2rem',
+        }}>
           Technical Arsenal
         </h2>
 
         <div ref={containerRef} style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
-          gap: '32px'
+          gridTemplateColumns: isSmall ? '1fr' : isMobile ? 'repeat(2, 1fr)' : 'repeat(auto-fill, minmax(280px, 1fr))',
+          gap: isMobile ? '16px' : '28px'
         }}>
           {skills.map((skill, index) => (
             <SkillBadge3D key={index} skill={skill} />
