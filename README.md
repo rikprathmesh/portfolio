@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Architectural Blueprint | Portfolio V.2
 ## Prathmesh Rikame - Software Engineer
 
@@ -76,7 +75,3 @@ The portal is currently using **Formspree** for instant reliable messaging.
 
 ---
 
-=======
-# portfolio
-High-performance React portfolio with 3D visuals, scroll animations, and GitHub API integration.
->>>>>>> cc93295ebac7aa1273f3937eb340c67af98e6b80
