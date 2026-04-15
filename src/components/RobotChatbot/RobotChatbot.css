@@ -1,0 +1,344 @@
+/* ─── Walking journey wrapper ────────────────────────────────────── */
+.robot-chatbot__journey {
+  position: fixed;
+  left: 0;
+  bottom: 24px;
+  z-index: 1050;
+  pointer-events: none;
+}
+
+/* ─── Walker container ───────────────────────────────────────────── */
+.robot-chatbot__walker {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ─── Capsule Robot (Premium) ────────────────────────────────────── */
+.robot-capsule {
+  position: relative;
+  width: 56px;
+  height: 64px;
+  border-radius: 28px;
+  background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 
+    0 12px 24px rgba(0, 0, 0, 0.4),
+    inset 0 2px 4px rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.robot-capsule--docked {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.1);
+}
+
+/* ─── Visor & Eye ────────────────────────────────────────────────── */
+.robot-visor {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 18px;
+  border-radius: 9px;
+  background: #020617;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.robot-capsule--docked .robot-visor {
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 32px;
+  height: 14px;
+  border-radius: 7px;
+}
+
+.robot-eye {
+  width: 20px;
+  height: 4px;
+  border-radius: 2px;
+  background: #38bdf8;
+  box-shadow: 0 0 8px #38bdf8, 0 0 16px #0ea5e9;
+  animation: scan-eye 2.5s ease-in-out infinite alternate;
+}
+
+.robot-capsule--docked .robot-eye {
+  width: 14px;
+  height: 4px;
+  animation: pulse-eye 2s ease-in-out infinite;
+}
+
+/* ─── Legs ───────────────────────────────────────────────────────── */
+.robot-legs {
+  position: absolute;
+  bottom: -12px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding: 0 10px;
+  z-index: 1;
+}
+
+.robot-leg {
+  width: 8px;
+  height: 18px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #334155 0%, #0f172a 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transform-origin: top center;
+}
+
+.robot-leg.left {
+  animation: run-leg 0.3s linear infinite alternate;
+}
+
+.robot-leg.right {
+  animation: run-leg 0.3s linear infinite alternate-reverse;
+}
+
+/* ─── Subtles ────────────────────────────────────────────────────── */
+.robot-shadow {
+  width: 40px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.4);
+  margin-top: 14px;
+  filter: blur(2px);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   DOCKED CHATBOT WIDGET
+══════════════════════════════════════════════════════════════════ */
+.robot-chatbot {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1060;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 14px;
+  pointer-events: none;
+}
+
+.robot-chatbot__panel,
+.robot-chatbot__launcher {
+  pointer-events: auto;
+}
+
+/* Chat panel */
+.robot-chatbot__panel {
+  width: min(320px, calc(100vw - 32px));
+  padding: 18px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(15, 23, 42, 0.95);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.robot-chatbot__panel-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.robot-chatbot__panel-header p,
+.robot-chatbot__launcher-copy strong {
+  color: #f8fafc;
+}
+
+.robot-chatbot__panel-header p {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.robot-chatbot__panel-header span,
+.robot-chatbot__launcher-copy span {
+  color: #94a3b8;
+  font-size: 0.78rem;
+}
+
+.robot-chatbot__icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  color: #f8fafc;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.robot-chatbot__icon-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.robot-chatbot__message {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px;
+  border-radius: 12px;
+  background: rgba(56, 189, 248, 0.1);
+  color: #f8fafc;
+  line-height: 1.5;
+  font-size: 0.9rem;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+}
+
+.robot-chatbot__message svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: #38bdf8;
+}
+
+.robot-chatbot__cta {
+  width: 100%;
+  margin-top: 14px;
+  padding: 12px 14px;
+  border: 0;
+  border-radius: 10px;
+  background: #38bdf8;
+  color: #0f172a;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.robot-chatbot__cta:hover {
+  background: #0ea5e9;
+  transform: translateY(-1px);
+}
+
+/* Launcher pill */
+.robot-chatbot__launcher {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 200px;
+  padding: 8px 14px 8px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.9);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  cursor: pointer;
+  transition: border-color 0.25s, background 0.25s;
+}
+
+.robot-chatbot__launcher:hover {
+  border-color: rgba(56, 189, 248, 0.4);
+  background: rgba(15, 23, 42, 1);
+}
+
+.robot-chatbot__launcher-face {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+}
+
+.robot-chatbot__launcher-face-inner {
+  position: absolute;
+  inset: 0;
+}
+
+/* Subtle ring in the button background */
+.robot-chatbot__face-ring {
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: conic-gradient(from 90deg, transparent, rgba(56, 189, 248, 0.2), transparent);
+  animation: robot-face-spin 4s linear infinite;
+}
+
+.robot-chatbot__launcher-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 2px;
+}
+
+.robot-chatbot__launcher-copy strong {
+  font-size: 0.9rem;
+}
+
+.robot-chatbot__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin-left: auto;
+  border-radius: 50%;
+  background: rgba(56, 189, 248, 0.1);
+  color: #38bdf8;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   KEYFRAMES
+══════════════════════════════════════════════════════════════════ */
+@keyframes run-leg {
+  from { transform: rotate(30deg); }
+  to   { transform: rotate(-30deg); }
+}
+
+@keyframes scan-eye {
+  0% { transform: translateX(-10px); width: 8px; }
+  50% { transform: translateX(0); width: 24px; }
+  100% { transform: translateX(10px); width: 8px; }
+}
+
+@keyframes pulse-eye {
+  0%, 100% { opacity: 1; transform: scaleX(1); }
+  50% { opacity: 0.6; transform: scaleX(0.7); }
+}
+
+@keyframes robot-face-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .robot-chatbot {
+    right: 14px;
+    bottom: 14px;
+  }
+
+  .robot-chatbot__journey {
+    bottom: 14px;
+  }
+
+  .robot-chatbot__launcher {
+    min-width: 0;
+    width: auto;
+    padding-right: 16px;
+  }
+  
+  .robot-chatbot__launcher-copy {
+    display: none; /* hide text on mobile for strict circle pill */
+  }
+}

@@ -3,6 +3,7 @@ import anime from 'animejs';
 import HeroVisual from '../components/HeroVisual';
 import { motion } from 'framer-motion';
 import { useIsMobile } from '../hooks/useIsMobile';
+import codingBoyImg from '../assets/coding-anime-boy.jpg';
 
 export default function Hero() {
   const headlineRef = useRef(null);
@@ -59,6 +60,30 @@ export default function Hero() {
         position: 'relative', zIndex: 1,
         /* On mobile the 3D visual is behind, so we don't need to share horizontal space */
       }}>
+
+        <motion.div
+           initial={{ opacity: 0, scale: 0.8 }}
+           animate={{ opacity: 1, scale: 1 }}
+           transition={{ duration: 1, ease: 'easeOut' }}
+           style={{
+             marginBottom: '2rem',
+             display: 'inline-block'
+           }}
+        >
+          <img 
+            src={codingBoyImg} 
+            alt="Anime Coding Boy" 
+            style={{
+              width: isMobile ? '80px' : '120px',
+              height: isMobile ? '80px' : '120px',
+              borderRadius: '50%',
+              objectFit: 'cover',
+              border: '2px solid var(--outline-variant)',
+              boxShadow: '0 10px 30px rgba(0,0,0,0.5)',
+              filter: 'grayscale(100%) contrast(1.2)'
+            }} 
+          />
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, x: -20 }}

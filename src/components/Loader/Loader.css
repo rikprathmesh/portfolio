@@ -1,0 +1,87 @@
+/* ─── Circular Binary / Electric Blue Loader ─── */
+
+.binary-loader-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: var(--surface, #101419); /* Deep dark background to match site */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* The actual small circular container */
+.binary-orb {
+  position: relative;
+  width: 130px;
+  height: 130px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.electric-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid transparent;
+}
+
+/* Bright Electric Blue Rotating Rings */
+.outer-ring {
+  border-top: 3px solid #38bdf8; /* bright electric blue */
+  border-bottom: 3px solid #0284c7; /* deeper electric blue */
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.5), inset 0 0 15px rgba(2, 132, 199, 0.4);
+  animation: spinOuter 1.5s linear infinite;
+}
+
+.inner-ring {
+  inset: 12px; /* slightly smaller concentric ring */
+  border-left: 2px solid #7dd3fc;
+  border-right: 2px solid #0369a1;
+  box-shadow: 0 0 10px rgba(125, 211, 252, 0.5);
+  animation: spinInner 2s linear infinite reverse;
+}
+
+@keyframes spinOuter {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.03); } /* subtle pulsing */
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes spinInner {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* The '0' and '1' Binary Stream inside */
+.binary-core {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Fira Code', 'JetBrains Mono', 'Courier New', monospace;
+  color: #e0f2fe; /* almost white electric blue */
+  text-shadow: 0 0 8px #38bdf8, 0 0 15px #0ea5e9; /* Intense electric glow */
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 3px;
+  user-select: none;
+}
+
+.binary-row {
+  line-height: 1;
+}
+
+/* Add a glowing electric blue ambient light around the whole orb */
+.binary-orb::after {
+  content: '';
+  position: absolute;
+  inset: -40px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 60%);
+  z-index: -1;
+  filter: blur(8px);
+}

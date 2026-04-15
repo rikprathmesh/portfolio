@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { FileDown, FileText } from 'lucide-react';
 
 export default function ResumeButton() {
-  const resumeUrl = "https://drive.google.com/file/d/1FSuy91sYWCP1kyVIWMdu0xZFLa1BX_cM/view?usp=drive_link";
+  const resumeUrl = "https://drive.google.com/file/d/1v7ckC3prb3__-DQvu4OmKLfCmsVend4q/view?usp=drive_link";
 
   return (
     <div style={{
